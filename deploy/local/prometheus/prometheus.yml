@@ -1,0 +1,18 @@
+global:
+  scrape_interval: 1m
+  evaluation_interval: 1m
+
+scrape_configs:
+  - job_name: 'http_prober'
+    metrics_path: /probe
+    static_configs:
+      - targets:
+        - bbc.com
+        - protonmailrmez3lotccipshtkleegetolb73fuirgj7r4o4vfu7ozyd.onion
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: host.docker.internal:8080

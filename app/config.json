@@ -1,0 +1,12 @@
+{
+  "TARGETS": [
+    {"name": "google",
+      "url": "google.com"},
+    {"name": "protonmail-onion",
+      "url": "protonmailrmez3lotccipshtkleegetolb73fuirgj7r4o4vfu7ozyd.onion"}
+  ],
+  "TOR": {
+    "host": "localhost",
+    "port": 9050
+  }
+}

@@ -1,0 +1,35 @@
+services:
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 127.0.0.1:9090:9090
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - prom_stack
+
+  grafana:
+    image: grafana/grafana
+    depends_on:
+      - prometheus
+    ports:
+      - 127.0.0.1:3000:3000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - prom_stack
+    volumes:
+      - grafana_volume:/var/lib/grafana
+      - ./grafana:/etc/grafana/provisioning
+
+volumes:
+  prom_volume: {}
+  grafana_volume: {}
+
+networks:
+  hostnet:
+    external:
+      name: host
+  prom_stack: {}
