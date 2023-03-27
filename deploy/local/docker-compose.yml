@@ -1,4 +1,15 @@
 services:
+  service-monitor:
+    build:
+      context: ../../
+    volumes:
+      - ./app/config.json:/usr/src/app/app/config.json
+    depends_on:
+      - tor
+    networks:
+      - application
+      - prom_stack
+
   prometheus:
     image: prom/prometheus
     volumes:
@@ -16,13 +27,20 @@ services:
       - prometheus
     ports:
       - 127.0.0.1:3000:3000
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     networks:
       - prom_stack
     volumes:
       - grafana_volume:/var/lib/grafana
       - ./grafana:/etc/grafana/provisioning
+
+  tor:
+    restart: always
+    image: dockage/tor-privoxy:latest
+    ports:
+      - "9050"
+      - "9051"
+    networks:
+      - application
 
 volumes:
   prom_volume: {}
@@ -33,3 +51,4 @@ networks:
     external:
       name: host
   prom_stack: {}
+  application: {}

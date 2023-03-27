@@ -15,4 +15,5 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: host.docker.internal:8080
+        #replacement: host.docker.internal:8080
+        replacement: service-monitor:8080

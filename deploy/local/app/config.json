@@ -1,6 +1,6 @@
 {
   "TOR": {
-    "host": "localhost",
+    "host": "tor",
     "port": 9050
   }
 }
