@@ -10,7 +10,7 @@ Jinja2==3.1.2
 MarkupSafe==2.1.2
 prometheus-client==0.16.0
 pycurl==7.45.2
-requests==2.28.2
+requests>=2.31.0
 stem==1.8.1
 urllib3==1.26.14
 validators==0.20.0
